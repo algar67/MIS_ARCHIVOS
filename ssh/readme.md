@@ -35,7 +35,7 @@ Para instalar el servicio SSH en un sistema Linux, puedes seguir estos pasos:
    **sudo systemctl enable ssh**
 
 
-Esto asegurará que el servicio SSH se inicie automáticamente cada vez que se inicie el sistema.
+   Esto asegurará que el servicio SSH se inicie automáticamente cada vez que se inicie el sistema.
 
-Con estos pasos, deberías haber instalado el servicio SSH en tu sistema Linux y estarás listo para conectarte a él de forma segura mediante SSH.
+   Con estos pasos, deberías haber instalado el servicio SSH en tu sistema Linux y estarás listo para conectarte a él de forma segura mediante SSH.
 
