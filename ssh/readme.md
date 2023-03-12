@@ -15,6 +15,7 @@ Para instalar el servicio SSH en un sistema Linux, puedes seguir estos pasos:
 
 
 4. El comando anterior instalará el servidor SSH y creará automáticamente un servicio systemd para iniciarlo y detenerlo. 
+
    Si necesitas iniciar el servicio manualmente, puedes usar el siguiente comando:
 
    **sudo systemctl start ssh**
