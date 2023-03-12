@@ -19,7 +19,7 @@ Para instalar el servicio SSH en un sistema Linux, puedes seguir estos pasos:
    **sudo systemctl start ssh**
 
 
-Y para detener el servicio SSH, utiliza el siguiente comando:
+   Y para detener el servicio SSH, utiliza el siguiente comando:
 
    **sudo systemctl stop ssh**
 
