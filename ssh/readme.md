@@ -2,18 +2,18 @@
 
 Para instalar el servicio SSH en un sistema Linux, puedes seguir estos pasos:
 
-1. Abre una terminal en el sistema Linux y conecta el sistema a Internet.
+1. Abre una terminal en el sistema Linux y conecta el sistema a Internet.<br><br>
 
 
 2. Ejecuta el siguiente comando para actualizar la lista de paquetes disponibles: 
 
-   **sudo apt-get update**
+   **sudo apt-get update** <br><br>
 
 
 
 3. Instala el paquete `openssh-server` utilizando el siguiente comando:
 
-    **sudo apt-get install openssh-server**
+    **sudo apt-get install openssh-server** <br><br>
 
 
 
@@ -26,7 +26,7 @@ Para instalar el servicio SSH en un sistema Linux, puedes seguir estos pasos:
 
    Y para detener el servicio SSH, utiliza el siguiente comando:
 
-   **sudo systemctl stop ssh**
+   **sudo systemctl stop ssh** <br><br>
 
 
 
