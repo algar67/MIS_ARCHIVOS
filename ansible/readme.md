@@ -24,6 +24,172 @@ Con estos pasos, deberías haber copiado la clave pública del nodo control de A
 
 <br><br><br>
 
+## Instalación de Ansible
+
+Para este Bootcamp vamos a utilizar como **Nodo de control** una **MV con Ubuntu**. 
+
+El único prerrequisito de Ansible es que el Nodo de control tenga instalado **Python 2** (versión 2.7) o **Python 3** (versiones 3.5 y superiores)
+
+***No se puede utilizar Ansible desde Windows*** Hay dos productos Ansible: 
+
+- Ansible community
+- Ansible-core (más minimalista)
+
+Instalaremos Ansible community
+
+Sobre la MV que se acompaña para el Bootcamp, vamos a crear un clon que utilizaremos como Nodo Administrado. Luego la configuraremos más adelante en otro Hands-On
+
+Después en la MV original, sobre un terminal: 
+
+```bash
+sudo -E add-apt-repository ppa:ansible/ansible
+
+sudo apt update
+
+# Solo ejecutar este comando si tenéis buena conexión de internet. 
+sudo apt upgrade
+
+sudo apt install ansible
+```
+
+Para otros linux
+
+```bash
+# Fedora:
+
+sudo dnfinstallansible
+
+# RHEL
+
+sudo yuminstallansible
+
+# CentOS
+
+sudo yuminstallepel-release
+sudo yuminstallansible
+```
+
+Ahora vamos a dar un nombre a nuestra máquina con Ansible:
+
+```bash
+sudo nmcli general hostname control
+sudo systemctl restart systemd-hostnamed
+reboot
+```
+
+También crearíamos una clave SSH con ssh-keygen.
+- Nota: Aunque sabemos que meter una **passphrase** es más seguro, en estos ejemplo, para evitar que Ansible nos la pregunte cada vez que lanzamos una tarea, la dejaremos vacía.
+
+
+Vamos a tomar ahora la máquina que clonamos. Y para hacer más realista la práctica, cambiaremos el nombre de la maquina, y nos preocuparemos de que tenga instalado SSH.
+  - Antes de abrir el nodo de control, cambiamos el nombre a la que funcionará como nodo administrado:
+
+```bash
+sudo nmcli general hostname nodo1 
+
+sudo systemctl restart systemd-hostnamed
+```
+
+Podríamos crear más nodos clonado nodo1 y realizando los cambios pertinentes en las ip de red.
+
+También habría que copiar el fichero **authorized_keys** en cada nodo para que así el nodo de control tenga acceso.
+
+Una vez que tengamos acceso por SSH a los nodos, podemos empezar lanzando los primeros comandos Ad-hoc
+
+## El primer inventario
+
+Ansible ***necesita identificar a quién se va a aplicar las tareas que definamos***, bien con comandos Ad - hoc o con Playbooks.
+
+Para ello necesitamos crear un **Inventario**.
+
+Podemos usar el ***inventario por defecto*** que se encuentra en **/etc/ansible/hosts**
+
+O podemos crear uno, en forma de texto plano, que se utilizará sólo para las tareas que lo indiquen.
+
+
+Para tener todo almacenado en una carpeta, vamos a crear en el Home la carpeta ansible 
+
+````bash
+mkdir ansible
+cd ansible
+````
+
+- Con cualquier herramienta de edición (vi, vim, gedit, etc) podemos crear el primer inventario llamado **inven.txt**:
+
+- Abrimos el fichero y en él, escribimos:
+  - nodo1
+  - O bien 192.168.174.102  (o la IP del nodo en cuestión)
+
+
+Ahora, nuestra primera instrucción de ansible será comprobar que nodos tenemos en el inventario. En un terminal, escribimos:
+
+````bash
+ansible all -i inven.txt --list-hosts
+````
+- **all** significa que la operación --list-hosts se va a aplicar a todos los nodos que aparezcan en el inventario.
+- **--list-hosts**  es la orden listar todos los hosts
+- **-i inven.txt** indica el nombre del inventario que utilizaremos en la orden
+  - Si se omite la opción -i , Ansible buscará hosts en el archivo de inventario /etc/ansible/hosts en su lugar.
+
+La salida será algo así: 
+- hosts (1):
+  - nodo1
+
+
+Si tuviéramos más de un nodo y quisiéramos agruparlos en categorías, etc en el ***fichero de inventario*** podríamos escribir algo parecido a esto:
+````text
+[pruebas] 
+    nodo1
+
+[produccion] 
+    nodo2
+````
+
+Y ahora, si sólo quiero mostrar los hosts que tengo agrupados bajo el grupo producción: 
+````bash
+ansible produccion -i inven.txt --list-hosts
+````
+
+Si añadimos un nuevo nodo fuera de los grupos a nuestro inventario
+
+````text
+nodo3
+[pruebas]
+    nodo1
+[produccion]
+    nodo2
+````
+
+Ese nodo3 estaría dentro de un grupo especial que crea Ansible llamado ***ungrouped***. También existe otro grupo por defecto llamado **all**.
+  - **Nota**: *cuidar que el nodo no agrupado esté al principio del fichero, porque si no, lo tomaría como si estuviera en el grupo produccion*
+````bash
+ansible ungrouped -i inven.txt --list-hosts
+````
+
+También se pueden crear grupos cuyo contenido sean otros grupos (children):
+
+````text
+[desarrollo] 
+  nodo3
+[pruebas] 
+  nodo1
+[produccion] 
+  nodo2
+[dev:children]
+  desarrollo 
+  pruebas
+[prod:children] 
+  produccion
+````
+
+La forma de llamarlos es similar a las anteriores: 
+
+````bash
+ansible dev -i inven.txt --list-hosts
+
+ansible prod -i inven.txt --list-hosts
+````
+
 ¿Desde que directorio se pueden lanzar los comandos de Ansible?
 
 En general, los comandos de Ansible se ejecutan desde el directorio raíz del proyecto, donde se encuentran los archivos de configuración (como `ansible.cfg` y `inventory`) y los playbooks.
