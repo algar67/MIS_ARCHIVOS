@@ -211,3 +211,156 @@ cd ansible-project
 En este caso, el comando ansible-playbook se está ejecutando desde el directorio raíz del proyecto ansible-project, donde se encuentran los archivos de configuración y los playbooks.
 
 Ten en cuenta que, si utilizas rutas relativas en tus playbooks o tareas, el directorio base será relativo a la ubicación del archivo en sí, y no al directorio desde el que se ejecuta el comando.
+
+
+### Crear listas y diccionarios
+
+#### Listas
+- En Ansible se pueden utilizar listas (arrays) y diccionarios (pares clave:valor) para definir variables de varios valores. Por ejemplo, si queremos definir una serie de números de puerto:
+
+```yaml
+vars:
+  port_nums: [21,22,23,25,80,443]
+```
+
+Por influencia de Python, los arrays se enmarcan entre [ ]
+
+- Otra forma sería en forma lista según YAML:
+
+````yaml
+vars:
+
+port_nums:
+  - 21
+  - 22
+  - 23
+  - 25
+  - 80
+  - 443
+````
+
+Otras formas de lanzar o ver elemento en Ansible 
+
+- Muestra el último elemento
+```yaml
+port_nums[-1]
+```
+- Mostrar desde el tercero hasta el último:
+```yaml
+port_nums[2:]
+```  
+
+- Mostrar desde el tercero hasta el penúltimo: •
+````yaml
+port_nums[2:-1]
+````  
+
+Otra forma sería en forma lista según YAML:
+
+````yaml
+vars:
+  port_nums:
+    - 21
+    - 22
+    - 23
+    - 25
+    - 80
+    - 443
+````
+
+Para imprimir todos los valores de **port_nums**: 
+
+- **{{ port_nums }}**
+
+Si queremos un elemento específico de la lista: 
+- **{{ port_nums[0] }}**
+
+Con el número 0 entre corchetes queremos indicar que hacemos referencia al primer elemento de la lista. (Igual que se hace en Python)
+
+#### Diccionarios
+
+Respecto a los diccionarios, aquí se muestra un ejemplo de definición del diccionario **usuarios**:
+
+- {‘clave1’: valor, ‘clave2’: valor}
+
+````yaml
+vars:
+  usuarios:
+    juan:
+      username: juan 
+      uid: 1122
+      shell: /bin/bash
+    ana:
+      username: ana 
+      uid: 2233
+      shell: /bin/sh
+````
+
+Sin embargo, para los diccionarios hay dos formas de acceder a sus elementos:
+
+````yaml
+usuarios['juan']['shell']
+# -> /bin/bash
+
+#ó
+
+{{usuarios.juan.shell}}
+````
+
+### Incluir variables externas
+
+Al igual que se puede importar (o incluir) tareas en un libro de jugadas. También se puede hacer lo mismo con las variables. Es decir, en un playbook, se puede incluir variables definidas en un archivo externo: **variables.yml**
+
+Ahora, para incluirlo en un playbook, sólo hay que utilizar la palabra clave **vars_files** y colocar el nombre del fichero como valor:
+
+```yaml
+---
+- name: variables externas
+  hosts: nodo1
+  # Aquí incluimos variables externas
+  vars_files: variables.yml
+  tasks:
+    - name: Mostrar el segundo elemento de port_nums 
+      debug:
+        msg: El puerto SSH es {{port_nums[1] }}
+    - name: Mostrar el uid de Juan
+      debug:  
+        msg: El UIDde Juan es {{usuarios.juan.uid }}
+```
+
+**vars_files** preprocesa y carga las variables al comienzo del playbook. Si lo que queremos es que se carguen a medida que van realizándose tareas (modo dinámico) utilizaremos **include_vars** así
+
+```yaml
+\---
+- name: variables externas 
+  hosts: nodo1 
+  tasks:
+  - name: Mostrar el segundo elemento de port_nums 
+    debug:
+      msg: El puerto SSH es cualquiera
+  - name: Carga de las variables 
+      include_vars: variables.yml
+  - name: Mostrar el uid de Juan
+    debug:
+      msg: El UIDde Juan es {{usuarios.juan.uid }}
+```
+
+### Obtener información del usuario. 
+Ansible permite solicitar información en tiempo de ejecución al usuario.
+Se utiliza vars_prompt y espera a que el usuario introduzca la información y pulse ENTER:
+
+````yaml
+---
+- name: saludo
+  hosts: nodo1
+  vars_prompt:
+    - name: nombre
+      prompt: ¿Cuál es su nombre?
+      private: no
+  tasks:
+    - name: saludamos al usuario
+      debug:
+        msg: Hola {{nombre }}
+````
+
+El determinar **private: no**, es necesario si queremos ver qué estamos escribiendo, porque de lo contrario, private es yes y pasará como con las contraseñas.
