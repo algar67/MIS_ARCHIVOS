@@ -33,5 +33,9 @@ Aquí está mi código:
     - name: imprimir informacion del fichero despues de modificarlo
       debug:
         msg: "{{ info_file2.stdout }}"
+        
+        ![The Bridge](./img/TheBridge_logo.png)
+        
+ ![Imagen del resultado ejercicio2](/img/salida.jpg)
 
 ![Imagen del resultado ejercicio2](./img/salida.jpg)
