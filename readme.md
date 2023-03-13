@@ -36,6 +36,6 @@ Aquí está mi código:
         
         ![The Bridge](./img/TheBridge_logo.png)
         
- ![Imagen del resultado ejercicio2](/img/salida.jpg)
+ ![Imagen del resultado ejercicio2](img/salida.jpg)
 
 ![Imagen del resultado ejercicio2](./img/salida.jpg)
