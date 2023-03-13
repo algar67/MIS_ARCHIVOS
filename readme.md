@@ -5,6 +5,9 @@ Temas
 1. Carpeta ssh para instrucciones de instalacion de ssh en ubuntu.<br><br>
 
 2. Carpeta ansible para instrucciones de instalcion de ansible y su funcionamiento: <br><br>
+ ![Imagen del resultado ejercicio2](./img/salida.png)
+        
+ ![Imagen del resultado ejercicio2](./img/salida2.png)
 
 3. 
 Aquí está mi código:
@@ -34,6 +37,4 @@ Aquí está mi código:
       debug:
         msg: "{{ info_file2.stdout }}"
         
- ![Imagen del resultado ejercicio2](./img/salida.png)
-        
- ![Imagen del resultado ejercicio2](./img/salida2.png)
+
