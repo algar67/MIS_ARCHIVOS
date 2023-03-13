@@ -36,4 +36,4 @@ Aquí está mi código:
         
         
         
- ![Imagen del resultado ejercicio2](./img/salida.jpg)
+ ![Imagen del resultado ejercicio2](./img/salida.png)
