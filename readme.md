@@ -1,4 +1,5 @@
 ## Apuntes del bootcamp
+***
 
 Temas
 
@@ -7,8 +8,8 @@ Temas
 2. Carpeta ansible para instrucciones de instalcion de ansible y su funcionamiento: <br><br>
 
 
-
-3. 
+## Ejercicios planteados
+***
 Aquí está mi código:
 
 ```bash
@@ -35,6 +36,8 @@ Aquí está mi código:
     - name: imprimir informacion del fichero despues de modificarlo
       debug:
         msg: "{{ info_file2.stdout }}"
+        
+```
         
        *salida del ejercicio*
        
