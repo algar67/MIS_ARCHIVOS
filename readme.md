@@ -34,6 +34,6 @@ Aquí está mi código:
       debug:
         msg: "{{ info_file2.stdout }}"
         
-        
-        
  ![Imagen del resultado ejercicio2](./img/salida.png)
+        
+ ![Imagen del resultado ejercicio2](./img/salida2.png)
