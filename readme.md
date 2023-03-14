@@ -7,10 +7,19 @@ Temas
 
 2. Carpeta ansible para instrucciones de instalcion de ansible y su funcionamiento: <br><br>
 
+# Ejercicio 1
 
-## Ejercicios planteados
-***
-Aquí está mi código:
+Terminar la ejecución del ejercicio que ejecuta un fichero main.py.
+
+# Ejercicio 2
+
+El módulo File, permite realizar las operaciones que trabajan con archivos y directorios, así como la de asignar
+permisos. Buscar algún ejemplo de cómo modificar la fecha de modificación y de acceso de un fichero a la fecha de hoy.
+
+*Solución planteada*
+Ejecutamos  'ansible-playbook modify.yml'
+
+El fichero modify.yml tiene el siguiente código
 
 ```bash
 - name: Update modification and access time of given file
@@ -35,12 +44,20 @@ Aquí está mi código:
       register: info_file2
     - name: imprimir informacion del fichero despues de modificarlo
       debug:
-        msg: "{{ info_file2.stdout }}"
-        
-```
-        
-       *salida del ejercicio*
-       
-         ![Imagen del resultado ejercicio2](./img/salida.png)
+        msg: "{{ info_file2.stdout }}
+
+#
+Y obtenemos esta salida.
+![Imagen del resultado ejercicio2](./img/salida.png)
+
+> Nota: Si consigues el ejemplo en forma de tarea de playbook, convertirlo a formato de comando de ansible. 
+
+
+# Ejercicio 3 (opcional)
+
+Conectar el repositorio de GitHub. 
+
+     
+         
         
 
