@@ -51,6 +51,10 @@ Y obtenemos esta salida.
 ![Imagen del resultado ejercicio2](./img/salida.png)
 
 > Nota: Si consigues el ejemplo en forma de tarea de playbook, convertirlo a formato de comando de ansible. 
+> 
+> **ansible nodo1 -m ansible.builtin.shell -a "touch -a -m /home/otrou/borrara/micarpeta/fichero.txt"**
+
+
 
 
 # Ejercicio 3 (opcional)
