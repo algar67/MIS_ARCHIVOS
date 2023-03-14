@@ -16,12 +16,12 @@ Terminar la ejecución del ejercicio que ejecuta un fichero main.py.
 El módulo File, permite realizar las operaciones que trabajan con archivos y directorios, así como la de asignar
 permisos. Buscar algún ejemplo de cómo modificar la fecha de modificación y de acceso de un fichero a la fecha de hoy.
 
-*Solución planteada*
+*Solución planteada*<br>
 Ejecutamos  'ansible-playbook modify.yml'
 
 El fichero modify.yml tiene el siguiente código
 
-```bash
+````yml
 - name: Update modification and access time of given file
   hosts: nodo1
   vars:
@@ -45,7 +45,8 @@ El fichero modify.yml tiene el siguiente código
     - name: imprimir informacion del fichero despues de modificarlo
       debug:
         msg: "{{ info_file2.stdout }}
-        
+```` 
+
 Y obtenemos esta salida.
 ![Imagen del resultado ejercicio2](./img/salida.png)
 
