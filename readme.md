@@ -60,8 +60,7 @@ Y obtenemos esta salida.
 # Ejercicio 3 (opcional)
 
 Conectar el repositorio de GitHub. 
+codigo del posible playbook a probar   
 
-     
-         
-        
+
 
