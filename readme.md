@@ -45,8 +45,7 @@ El fichero modify.yml tiene el siguiente código
     - name: imprimir informacion del fichero despues de modificarlo
       debug:
         msg: "{{ info_file2.stdout }}
-
-#
+        
 Y obtenemos esta salida.
 ![Imagen del resultado ejercicio2](./img/salida.png)
 
