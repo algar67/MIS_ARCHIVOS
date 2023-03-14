@@ -62,5 +62,27 @@ Y obtenemos esta salida.
 Conectar el repositorio de GitHub. 
 codigo del posible playbook a probar   
 
+---
+- name: Clonar repositorio de Git en servidor remoto
+  hosts: nodo1
+  become: true
+
+  vars:
+    git_repo_url: https://github.com/tu-usuario/tu-repositorio.git
+    git_branch: main
+    git_dest_dir: /home/ubuntu/mi-proyecto
+
+  tasks:
+    - name: Instalar Git
+      apt:
+        name:
+          - git
+        state: present
+
+    - name: Clonar repositorio de Git
+      git:
+        repo: "{{ git_repo_url }}"
+        version: "{{ git_branch }}"
+        dest: "{{ git_dest_dir }}"
 
 
