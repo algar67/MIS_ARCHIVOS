@@ -9,7 +9,8 @@ ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQC/+/K4XFwRI3x2mdMzdKdaLPkUu1rnRwmaQ2Sc15JE
 
 Configuro el fichero .gitconfig de la siguiente manera ( si no esta lo creo)
 (fichero nodo 1 en ~/.gitconfig       /home/otrou/.gitconfig)                           
-
+ 
+ 
 ````
 [credential]
         helper = cache
