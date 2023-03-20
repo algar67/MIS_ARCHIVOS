@@ -29,8 +29,7 @@ Para instalar el servicio SSH en un sistema Linux, puedes seguir estos pasos:
    # INSTALAR SSH SERVIDOR Y SSH CLIENTE EN UBUNTU
 
 ## Para instalar el servidor SSH en Ubuntu, puedes seguir estos pasos:
-        ------------------------
-
+        
 1.Abre una terminal en Ubuntu.
 
 2.Ejecuta el siguiente comando para actualizar la lista de paquetes:
@@ -42,8 +41,7 @@ Para instalar el servicio SSH en un sistema Linux, puedes seguir estos pasos:
 4.Espera a que se complete la instalación.
 
 ## Para instalar el cliente SSH en Ubuntu, puedes seguir estos pasos:
-        -----------------------
-
+        
 1.Abre una terminal en Ubuntu.
 
 2.Ejecuta el siguiente comando para actualizar la lista de paquetes:
